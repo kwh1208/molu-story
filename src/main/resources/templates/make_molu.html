@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>moluMaker</title>
+</head>
+<body>
+<div id="nav-bar">
+  <span class="nav">스토리 감상</span>
+  <span class="nav">스토리 만들기</span>
+  <span th:if="${param.status}" class="member">join</span>
+  <span th:if="${param.status}" class="member">login</span>
+  <span th:unless="${param.status}" class="member">logout</span>
+  <span th:unless="${param.status}" class="member">my page</span>
+</div>
+<div>
+  조작페이지
+</div>
+<div>
+  사이드바(상태)
+    새페이지 추가 -> 새페이지 추가하면 지금 있는거 다 안보이게
+    새페이지 추가(배경, 캐릭터 유지)
+    배경선택 -> 새창열어서 누르면 그 배경으로
+    사진추가 -> 새창열어서 학생이름 검색하고 그 해당학생 사진 보여줌. 없으면 밑에 추가버튼
+    대사추가(학생이름 / 동아리)
+    센세 대사(선택지 형식)
+    저장
+</div>
+</body>
+</html>

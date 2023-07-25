@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>moluMaker</title>
+</head>
+<body>
+<div id="nav-bar">
+  <span class="nav">스토리 감상</span>
+  <span class="nav">스토리 만들기</span>
+  <span th:if="${param.status}" class="member">join</span>
+  <span th:if="${param.status}" class="member">login</span>
+  <span th:unless="${param.status}" class="member">logout</span>
+  <span th:unless="${param.status}" class="member">my page</span>
+</div>
+<div>
+    <h2>공지사항</h2>
+    <p></p>
+    <h2>사용법</h2>
+    <p></p>
+</div>
+</body>
+</html>
