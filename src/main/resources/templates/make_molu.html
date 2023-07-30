@@ -1,8 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>moluMaker</title>
+  <link rel="stylesheet" href="/templates/css/make.css" />
+  <style>
+    .background{
+      margin: 0px;
+      padding: 0px;
+      background-image: url('/img/샬레사무실.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 93%;
+      top: 7%;
+      width: 85%;
+      left: 0;
+    }
+  </style>
 </head>
 <body>
 <div id="nav-bar">
@@ -14,17 +29,154 @@
   <span th:unless="${param.status}" class="member">my page</span>
 </div>
 <div>
-  조작페이지
+  <div id="side-bar">
+    <span id="make-new-page" onclick="addNewMoluStory(moluStoryCount)">새 페이지 추가</span>
+    <div class="page_list">
+    <p class="page1" id="page1" onclick="showModal(1); "> page1 </p>
+      <div id="modal" class="hidden">
+        <p id="add-background" onclick="changeBackground()">배경 변경</p>
+        <p id="add-student" onclick="addStudent()">학생 추가</p>
+        <p id="add-dialog" onclick="addDialog()">선택지 추가</p>
+        <p id="add-script" onclick="changeScript()">대화 추가</p>
+        <button id="close-modal-btn" onclick="hideModal()">닫기</button>
+      </div>
+    </div>
+    <button id="save" onclick="save()">저장</button>
+  </div>
+  <div id="molu-story-1" class="molu-story">
+    <div class="background">
+      <div class="fake-background">
+        <img src="" id="character">
+        <div class="dialog_options">
+          <div class="dialog"><p>선택지 1</p></div><!--사용자가 입력하는 텍스트-->
+        </div>
+        <div class="script_div">
+          <span class="name">학생 이름</span><!--이미지 이름 따와서-->
+          <span class="club">동아리 이름</span><!--이미지 학생 동아리 자동 매칭-->
+          <hr id="division_line" style="position: relative; top: 4%;">
+          <p class="script">정말 밝고 건전한 게임입니다.</p><!--사용자가 입력하는 텍스트-->
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<div>
-  사이드바(상태)
-    새페이지 추가 -> 새페이지 추가하면 지금 있는거 다 안보이게
-    새페이지 추가(배경, 캐릭터 유지)
-    배경선택 -> 새창열어서 누르면 그 배경으로
-    사진추가 -> 새창열어서 학생이름 검색하고 그 해당학생 사진 보여줌. 없으면 밑에 추가버튼
-    대사추가(학생이름 / 동아리)
-    센세 대사(선택지 형식)
-    저장
-</div>
+<script>
+  let moluStoryCount = 2;
+
+  function addNewMoluStory(pageNumber) {
+    const moluStoryContainer = document.getElementById('molu-story-1');
+    const newMoluStory = moluStoryContainer.cloneNode(true);
+    moluStoryCount++;
+    newMoluStory.id = `molu-story-${pageNumber}`;
+    moluStoryContainer.parentNode.appendChild(newMoluStory);
+    const allMoluStory = document.querySelectorAll('.molu-story');
+
+    allMoluStory.forEach((element) => {
+      element.classList.add('hidden');
+    });
+    newMoluStory.classList.remove('hidden');
+
+    const pageElement = document.createElement('p');
+    pageElement.className = 'page'+pageNumber;
+    pageElement.id = 'page'+pageNumber;
+    pageElement.textContent = 'page'+pageNumber;
+    pageElement.onclick = function() {showModal(pageNumber);};
+
+    const pageContainer = document.getElementById('side-bar').querySelector('.page_list');
+    pageContainer.appendChild(pageElement);
+
+    const modalContainer = document.getElementById('modal');
+    pageContainer.insertBefore(pageElement, modalContainer);
+  }
+  let onPageNumber = 1;
+  function changeBackground(){
+    const width = 600; // 창의 너비 (픽셀)
+    const height = 400; // 창의 높이 (픽셀)
+    const left = (window.innerWidth - width) / 2; // 창의 가로 위치
+    const top = (window.innerHeight - height) / 2; // 창의 세로 위치
+
+    const url = `/selectBackground`;
+
+    const newWindow = window.open(url, "_blank", `width=${width}, height=${height}, left=${left}, top=${top}`);
+
+    const result = window.confirm("창 B를 닫으시겠습니까?");
+    //쿠키 가져오는 창
+    if(result){
+      nextBackground()
+    }
+    //그다음 진행될 함수
+
+  }
+  function nextBackground(){
+
+  }
+
+  function addStudent(){
+    const width = 600; // 창의 너비 (픽셀)
+    const height = 400; // 창의 높이 (픽셀)
+    const left = (window.innerWidth - width) / 2; // 창의 가로 위치
+    const top = (window.innerHeight - height) / 2; // 창의 세로 위치
+
+    const url = "/addStudent";
+    const newWindow = window.open(url, "_blank", `width=${width}, height=${height}, left=${left}, top=${top}`);
+
+    const result = window.confirm("창 B를 닫으시겠습니까?");
+    if (result){
+      nextStudent()
+    }
+    //쿠키 가져오는 창
+  }
+  function nextStudent(){
+
+  }
+  function addDialog(){
+
+  }
+  function changeScript(){
+
+  }
+
+  function showModal(pageNumber) {
+    const allSideBarElements = document.querySelectorAll('#side-bar *');
+    allSideBarElements.forEach((element) => {
+      element.classList.remove('on');
+    });
+    // 모달 창을 보여줍니다.
+    const modalContainer = document.getElementById('modal');
+    modalContainer.classList.remove('hidden');
+
+    const pageTag = document.getElementById(`page${pageNumber}`);
+    pageTag.classList.add('on');
+
+    const pageElement = document.getElementById(`page${pageNumber}`);
+    pageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    onPageNumber = pageNumber;
+  }
+
+  function hideModal() {
+    const modalContainer = document.getElementById('modal');
+    modalContainer.classList.add('hidden');
+
+    const allSideBarElements = document.querySelectorAll('#side-bar *');
+    allSideBarElements.forEach((element) => {
+      element.classList.remove('on');
+    });
+  }
+  function save(){
+    const currentURL = window.location.href;
+
+    const parts = currentURL.split('/');
+    const storyID = parts[parts.length - 1];
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: "",
+    };
+    const saveUrl = "/save/"+storyID;
+    fetch(saveUrl, requestOptions);
+  }
+</script>
 </body>
 </html>

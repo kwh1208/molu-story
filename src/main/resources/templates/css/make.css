@@ -1,0 +1,100 @@
+@font-face {
+    font-family: 'CustomFont';
+    src: url(font/NanumSquareRoundOTFB.otf);
+}
+body{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.script_div{
+    background-color: rgba(14, 15, 55, 0.7);
+    width: 85%;
+    height: 250px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+}
+#division_line{
+    width: 80%;
+    margin: auto;
+}
+.name{
+    position: relative;
+    top: 2.5%;
+    color: white;
+    font-size: x-large;
+    font-weight: 900;
+}
+.club{
+    position: relative;
+    top: 2.5%;
+    color: rgb(129, 215, 250);
+    font-size: large;
+    font-weight: 700;
+}
+.fake-background{
+    margin: 0px;
+    padding: 0px;
+    height: 100vh;
+    z-index: 1;
+    pointer-events: all;
+}
+.script{
+    color: white;
+    font-size: x-large;
+    font-weight: 700;
+    font-family: 'CustomFont';
+}
+#character {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.dialog_options{
+    position: absolute;
+    top: 30%;
+    left: 15%;
+    z-index: 10;
+    width: 60%;
+}
+.dialog{
+    margin-top: 5%;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+.dialog>p{
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-size: larger;
+    font-weight: bold;
+    text-align: center;
+}
+#side-bar{
+    position: absolute;
+    height: 93%;
+    width: 15%;
+    right: 0;
+    top: 7%;
+    border-left: black 3px solid;
+}
+#nav-bar{
+    position: fixed;
+    height: 7%;
+    width: 100%;
+    top: 0;
+    background-color: red;
+}
+
+.hidden {
+    display: none;
+}
+.on{
+    background-color: darkgrey;
+}
+
+#save{
+    position: fixed;
+    right: 6%;
+    bottom: 5%;
+}

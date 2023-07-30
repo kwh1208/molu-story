@@ -1,0 +1,24 @@
+<body>
+<div id="my-element">이 요소에 스타일을 추가합니다.</div>
+
+<script>
+    // 스타일을 추가할 요소를 선택합니다.
+    const myElement = document.getElementById('my-element');
+
+    // 스타일을 추가할 내용을 생성합니다.
+    const styleContent = `
+      color: red;
+      font-size: 24px;
+      font-weight: bold;
+    `;
+
+    // <style> 요소를 생성합니다.
+    const styleElement = document.createElement('style');
+
+    // 생성한 <style> 요소에 스타일 내용을 추가합니다.
+    styleElement.textContent = `#${myElement.id} { ${styleContent} }`;
+
+    // <style> 요소를 <head> 태그에 추가합니다.
+    document.head.appendChild(styleElement);
+</script>
+</body>
